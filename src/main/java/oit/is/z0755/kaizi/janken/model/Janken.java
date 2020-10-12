@@ -1,11 +1,14 @@
 package oit.is.z0755.kaizi.janken.model;
 
+import java.util.Random;
+
 public class Janken {
   int i, you;
 
   public Janken(int i) {
     this.i = i;
-    you = 0;
+    Random random = new Random();
+    you = random.nextInt(3);
   }
 
   public String myhand() {
