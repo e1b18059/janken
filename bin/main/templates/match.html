@@ -7,9 +7,30 @@
 </head>
 
 <body>
+  <h1>Match</h1>
+
   <div th:if="${user_name} and ${cpu_name}">
     <h2>[[${user_name}]] V.S. [[${cpu_name}]]</h2>
   </div>
+
+  <div th:if="${cpu_id}">
+    <a th:href="@{/lec02_1(cpu_id=${cpu_id},janken=0)}">ぐー</a>
+    <a th:href="@{/lec02_1(cpu_id=${cpu_id},janken=1)}">ちょき</a>
+    <a th:href="@{/lec02_1(cpu_id=${cpu_id},janken=2)}">ぱー</a>
+  </div>
+
+  <div th:if="${myhand}">
+    あなたの手 [[${myhand}]]
+  </div>
+  <div th:if="${yourhand}">
+    相手の手 [[${yourhand}]]
+  </div>
+  <div th:if="${JankenResult}">
+    結果 [[${JankenResult}]]
+  </div>
+
+  <a href="/lec02">もどる</a>
+
 </body>
 
 </html>

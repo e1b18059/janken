@@ -3,9 +3,9 @@ CREATE TABLE users (
     name CHAR NOT NULL
 );
 CREATE TABLE matches (
-    id INT,
-    user_1 INT,
-    user_2 INT,
-    user_1_hand CHAR,
-    user_2_hand CHAR
+    id IDENTITY,
+    user_1 INT NOT NULL REFERENCES users (id),
+    user_2 INT NOT NULL REFERENCES users (id),
+    user_1_hand CHAR NOT NULL,
+    user_2_hand CHAR NOT NULL
 );
