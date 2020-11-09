@@ -10,21 +10,37 @@
 </head>
 
 <body>
-  <p>
   <div th:if="${login_user}">
     Hi [[${login_user}]]
   </div>
-  <h2>エントリー</h2>
-  <ul>
-    <!--eachは所謂for each．この場合roomオブジェクトのusersフィールドにあるすべてのデータを一通り表示する
+
+  <div th:if="${users}">
+    <h2>エントリー</h2>
+    <ul>
+      <!--eachは所謂for each．この場合roomオブジェクトのusersフィールドにあるすべてのデータを一通り表示する
       thが指定されているので[]が不要になる-->
-    <li th:each="user,stat:${users}">[[${user.name}]]</li>
-  </ul>
+      <li th:each="user,stat:${users}">[[${user.name}]]</li>
+    </ul>
+    今[[${users.size()}]]人がエントリーしています
+  </div>
+
+  <div th:if="${matches}">
+    <h2>試合結果</h2>
+    <ul style="list-style: none; padding-left: 0;">
+      <li th:each="match,stat:${matches}">
+        id:[[${match.id}]]
+        user_1:[[${match.user_1}]]
+        user_2:[[${match.user_2}]]
+        user_1の手:[[${match.user_1_hand}]]
+        user_2の手:[[${match.user_2_hand}]]
+      </li>
+    </ul>
   </div>
 
   <a href="/lec02_1?janken=0">ぐー</a>
   <a href="/lec02_1?janken=1">ちょき</a>
   <a href="/lec02_1?janken=2">ぱー</a>
+
   <div th:if="${myhand}">
     あなたの手 [[${myhand}]]
   </div>
@@ -34,7 +50,6 @@
   <div th:if="${JankenResult}">
     結果 [[${JankenResult}]]
   </div>
-  </p>
 </body>
 
 </html>

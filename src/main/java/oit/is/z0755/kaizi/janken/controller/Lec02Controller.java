@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z0755.kaizi.janken.model.Janken;
 import oit.is.z0755.kaizi.janken.model.Entry;
 import oit.is.z0755.kaizi.janken.model.User;
 import oit.is.z0755.kaizi.janken.model.UserMapper;
+import oit.is.z0755.kaizi.janken.model.Match;
+import oit.is.z0755.kaizi.janken.model.MatchMapper;
 
 @Controller
 public class Lec02Controller {
@@ -24,6 +26,9 @@ public class Lec02Controller {
   @Autowired
   private UserMapper userMapper;
 
+  @Autowired
+  private MatchMapper matchMapper;
+
   @GetMapping("/lec02")
   public String lec02(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
@@ -32,12 +37,8 @@ public class Lec02Controller {
     model.addAttribute("login_user", loginUser);
     ArrayList<User> users = userMapper.selectAllUsers();
     model.addAttribute("users", users);
-    return "lec02.html";
-  }
-
-  @PostMapping("/lec02")
-  public String lec02(@RequestParam String user_name, ModelMap model) {
-    model.addAttribute("user_name", user_name);
+    ArrayList<Match> matches = matchMapper.selectAllMatches();
+    model.addAttribute("matches", matches);
     return "lec02.html";
   }
 
