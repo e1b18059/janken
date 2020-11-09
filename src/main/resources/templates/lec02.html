@@ -19,7 +19,9 @@
     <ul>
       <!--eachは所謂for each．この場合roomオブジェクトのusersフィールドにあるすべてのデータを一通り表示する
       thが指定されているので[]が不要になる-->
-      <li th:each="user,stat:${users}">[[${user.name}]]</li>
+      <li th:each="user,stat:${users}">
+        <a th:href="@{/match(id=${user.id})}">[[${user.name}]]</a>
+      </li>
     </ul>
     今[[${users.size()}]]人がエントリーしています
   </div>
@@ -37,19 +39,6 @@
     </ul>
   </div>
 
-  <a href="/lec02_1?janken=0">ぐー</a>
-  <a href="/lec02_1?janken=1">ちょき</a>
-  <a href="/lec02_1?janken=2">ぱー</a>
-
-  <div th:if="${myhand}">
-    あなたの手 [[${myhand}]]
-  </div>
-  <div th:if="${yourhand}">
-    相手の手 [[${yourhand}]]
-  </div>
-  <div th:if="${JankenResult}">
-    結果 [[${JankenResult}]]
-  </div>
 </body>
 
 </html>
