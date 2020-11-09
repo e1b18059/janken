@@ -1,6 +1,6 @@
 package oit.is.z0755.kaizi.janken.controller;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z0755.kaizi.janken.model.Janken;
 import oit.is.z0755.kaizi.janken.model.Entry;
-import oit.is.z0755.kaizi.janken.model.User;
 import oit.is.z0755.kaizi.janken.model.UserMapper;
-import oit.is.z0755.kaizi.janken.model.Match;
 import oit.is.z0755.kaizi.janken.model.MatchMapper;
 
 @Controller
@@ -35,11 +33,16 @@ public class Lec02Controller {
     this.entry.addUser(loginUser);
     model.addAttribute("entry", this.entry);
     model.addAttribute("login_user", loginUser);
-    ArrayList<User> users = userMapper.selectAllUsers();
-    model.addAttribute("users", users);
-    ArrayList<Match> matches = matchMapper.selectAllMatches();
-    model.addAttribute("matches", matches);
+    model.addAttribute("users", userMapper.selectAllUsers());
+    model.addAttribute("matches", matchMapper.selectAllMatches());
     return "lec02.html";
+  }
+
+  @GetMapping("/match")
+  public String match(@RequestParam Integer id, Principal prin, ModelMap model) {
+    model.addAttribute("user_name", prin.getName());
+    model.addAttribute("cpu_name", userMapper.selectAllUsers().get(id - 1).getName());
+    return "match.html";
   }
 
   @GetMapping("/lec02_1")
